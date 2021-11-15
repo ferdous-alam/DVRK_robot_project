@@ -1,4 +1,4 @@
 # Resources
-1. Official dvrk github repo: [This link](https://github.com/jhu-dvrk/sawIntuitiveResearchKit/wiki)
+1. Official dvrk github repo: [https://github.com/jhu-dvrk/sawIntuitiveResearchKit/wiki](https://github.com/jhu-dvrk/sawIntuitiveResearchKit/wiki)
 
-2. Reinforcement learning gym environment for dvrk [This link](https://github.com/ucsdarclab/dVRL)
+2. Reinforcement learning gym environment for dvrk [https://github.com/ucsdarclab/dVRL](https://github.com/ucsdarclab/dVRL)
