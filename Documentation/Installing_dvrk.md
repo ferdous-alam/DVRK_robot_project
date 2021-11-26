@@ -28,15 +28,18 @@ fi
 When following step 11, catkin build was showing few errors and cmake was not working. I found ways that seemed to work for me. 
 1. error 1, something like this (empy error)
 ```-- Could NOT find PY_em (missing: PY_EM) CMake Error at cmake/empy.cmake:30 (message): Unable to find either executable 'empy' or Python module 'em'...  try installing the package 'python-empy'```
+
 solution: ```pip install empy```
 
 2. error 2, python path cataking package error
-```ImportError: "from catkin_pkg.package import parse_package" failed: No module named 'catkin_pkg'
-Make sure that you have installed "catkin_pkg", it is up to date and on the PYTHONPATH```
+```ImportError: "from catkin_pkg.package import parse_package failed: No module named 'catkin_pkg' Make sure that you have installed "catkin_pkg", it is up to date and on the PYTHONPATH```
+
 solution: open the .bashrc file and add the following line
 ```export PYTHONPATH=$PYTHONPATH:/usr/lib/python3/dist-packages```
 Then restart the terminal. 
-3. error 3: uuid error, this may have something to do with the anaconda that I had on my machine,  
+3. error 3: uuid error, this may have something to do with the anaconda that I had on my machine, 
+
+solution: 
 ```ls ~/anaconda3/lib/libuuid*```
 ```mkdir ~/anaconda3/libuuid```
 ```mv ~/anaconda3/lib/libuuid* ~/anaconda3/libuuid```
