@@ -37,6 +37,7 @@ solution: ```pip install empy```
 solution: open the .bashrc file and add the following line
 ```export PYTHONPATH=$PYTHONPATH:/usr/lib/python3/dist-packages```
 Then restart the terminal. 
+
 3. error 3: uuid error, this may have something to do with the anaconda that I had on my machine, 
 
 solution: 
