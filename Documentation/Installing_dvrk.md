@@ -12,11 +12,14 @@ mkdir ~/catkin_ws```
 9. get code from github, here I used the devel branch not the master branch, ```wstool merge https://raw.githubusercontent.com/jhu-dvrk/dvrk-ros/devel/dvrk_ros.rosinstall```
 10. now wstool knows which repositories to pull ```wstool up```
 11. compile everything use catkin build command ```catkin build --summary```
-12. setting up environment variables for ROS, open the ```.bashrc``` file in the home directory. It is a hidden folder so **Cntrl+H** will show the hidden folders. ```# for ROS
+12. setting up environment variables for ROS, open the ```.bashrc``` file in the home directory. It is a hidden folder so **Cntrl+H** will show the hidden folders. 
+```
+# for ROS
 if [ -f ~/catkin_ws/devel/setup.bash ]; then
   . ~/catkin_ws/devel/setup.bash
 fi
 # for cisst (optional)
 if [ -f ~/catkin_ws/devel/cisstvars.sh ]; then
   . ~/catkin_ws/devel/cisstvars.sh
-fi```
+fi
+```
