@@ -31,12 +31,12 @@ When following step 11, catkin build was showing few errors and cmake was not wo
 
 solution: ```pip install empy```
 
-2. error 2, python path cataking package error
+2. error 2, python path catkin package error
 ```ImportError: "from catkin_pkg.package import parse_package failed: No module named 'catkin_pkg' Make sure that you have installed "catkin_pkg", it is up to date and on the PYTHONPATH```
 
 solution: open the .bashrc file and add the following line
 ```export PYTHONPATH=$PYTHONPATH:/usr/lib/python3/dist-packages```
-Then restart the terminal. 
+Then RESTART the terminal. 
 
 3. error 3: uuid error, this may have something to do with the anaconda that I had on my machine, 
 
@@ -44,3 +44,6 @@ solution:
 ```ls ~/anaconda3/lib/libuuid*```
 ```mkdir ~/anaconda3/libuuid```
 ```mv ~/anaconda3/lib/libuuid* ~/anaconda3/libuuid```
+
+
+
