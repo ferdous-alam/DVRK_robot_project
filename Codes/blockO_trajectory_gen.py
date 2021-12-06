@@ -16,7 +16,7 @@ ISSUES:
 # ***** USER-INPUT PARAMETERS (Global Vars) *****
 # Block "O"
 ORIGIN_OFFSET = np.array([0, 0, 0])
-SCALE = 1  # Block "O" scaling, baseline is such that the bottom horizontal line is 10 cm
+SCALE = 0.5  # Block "O" scaling, baseline is such that the bottom horizontal line is 10 cm
 ORIENTATION = np.array([  # frame orientation of Block "O"
     [1, 0, 0],
     [0, 1, 0],
@@ -39,15 +39,8 @@ def main():
     # ***** GENERATE ALL TRAPEZOIDAL TIME-SCALED TRANSFORMATIONS *****
     trajectory = generate_trapezoidal_tranformations(waypoint_transformations)
     # ***** OUTPUT TRAJECTORY TO dVRK ROBOT *****
-    run_dvrk(trajectory)
+    # run_dvrk(trajectory)
     return modified_waypoints_ordered, waypoint_transformations, trajectory
-
-
-def run_dvrk(trajectory):
-    """Iteratively writes the list of time-scaled trajectories, along each path section, to the dVRK ROS robot."""
-    for Transform in trajectory:
-        # TODO add wait() cmd, and cp command
-        pass
 
 
 def modify_blockO():
@@ -68,9 +61,9 @@ def modify_blockO():
         [0.048, 0, 0]], dtype='double')  # w8/w0
     # modulation calculation
     modulated_waypoints = SCALE * np.dot(ORIENTATION, baseline_waypoints_ordered.T).T + ORIGIN_OFFSET
-    print("\nModulated Block \"O\" Coordinates:")
-    for i, waypoint in enumerate(modulated_waypoints):
-        print(f'\tw{i}: {waypoint}')
+    # print("\nModulated Block \"O\" Coordinates:")
+    # for i, waypoint in enumerate(modulated_waypoints):
+    #     print(f'\tw{i}: {waypoint}')
     return modulated_waypoints
 
 
@@ -89,7 +82,7 @@ def generate_waypoint_transformations(modified_waypoints_ordered):
 
     # Precompute ordered list of homogenous transforms at discrete waypoint coordinates
     T_list = []
-    print('\nWaypoint Transformations Generated:')
+    # print('\nWaypoint Transformations Generated:')
     for i, _ in enumerate(modified_waypoints_ordered):
         try:
             w_start = modified_waypoints_ordered[i]
@@ -102,9 +95,16 @@ def generate_waypoint_transformations(modified_waypoints_ordered):
 
             # third, dependent unit vector of rotation
             # TODO order matters here, must align with {EE} with (+) or multiply (-)
-            r_x = r_parallel_unit  # TODO verify orientation
-            r_z = r_normal_unit  # TODO verify orientation
+            # r_x = r_parallel_unit  # TODO verify orientation
+            # r_z = r_normal_unit  # TODO verify orientation
+            # r_y = np.cross(r_x, r_z) / np.linalg.norm(np.cross(r_x, r_z))
+            #
+            # --------- test segment -----------------
+            r_x = -r_parallel_unit  # TODO verify orientation
+            r_z = -r_normal_unit  # TODO verify orientation
             r_y = np.cross(r_x, r_z) / np.linalg.norm(np.cross(r_x, r_z))
+            # -------------------------
+
 
             # build common rotation matrix
             R = np.column_stack((r_x, r_y, r_z))
@@ -117,7 +117,7 @@ def generate_waypoint_transformations(modified_waypoints_ordered):
             T_list.append(T_start)
             T_list.append(T_end)
 
-            print(f'\n\tT{i}{i}:\n{T_start}\n\n\tT{i}{i+1}:\n{T_end}')
+            # print(f'\n\tT{i}{i}:\n{T_start}\n\n\tT{i}{i+1}:\n{T_end}')
         except IndexError:  # windowing 2 full waypoints at a time, indices beyond at end
             break
     return T_list
@@ -157,7 +157,7 @@ def generate_trapezoidal_tranformations(T_list):
                 a = ACCEL_ROT
             else:
                 sys.exit('Path Error')
-            print(f'\n{msg}\n')
+            # print(f'\n{msg}\n')
 
             # Total time for straight-line path in task-space
             T = (a + v ** 2) / (v * a)
@@ -177,7 +177,7 @@ def generate_trapezoidal_tranformations(T_list):
                 elif T - v / a < t <= T:
                     s = (2 * a * v * T - 2 * v ** 2 - a ** 2 * (t - T) ** 2) / (2 * a)
                 else:  # handle when mod(T, ts) != 0, at end of path
-                    print(f'\nNOTE: Path section {i} is {round(t - T),4} seconds beyond desired length')
+                    # print(f'\nNOTE: Path section {i} is {round(t - T),4} seconds beyond desired length')
                     s = 1  # finish path
 
                 # calculate R(s), p(s) of T=(R,p)
@@ -188,7 +188,7 @@ def generate_trapezoidal_tranformations(T_list):
                 # create transform from (R,p) & add to trajectory list
                 T_s = np.vstack([np.column_stack((R_s, p_s)), np.array([0, 0, 0, 1])])
                 trajectory.append(T_s)
-                print(f'\n{msg} from w{i} to w{i + (i+1)%2}:\ns({round(t,3)}) = {round(s,3)}, of T = {round(T,3)} sec:\n T=\n{T_s}')
+                # print(f'\n{msg} from w{i} to w{i + (i+1)%2}:\ns({round(t,3)}) = {round(s,3)}, of T = {round(T,3)} sec:\n T=\n{T_s}')
 
         except IndexError:  # windowing 2 full transformations at a time, indices beyond at end
             break
