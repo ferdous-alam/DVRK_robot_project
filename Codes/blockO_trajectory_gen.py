@@ -15,20 +15,20 @@ ISSUES:
 # ***** USER-INPUT PARAMETERS (Global Vars) *****
 # Block "O"
 ORIGIN_OFFSET = np.array([0, 0, 0])
-SCALE = 1  # Block "O" scaling, baseline is such that the bottom horizontal line is 10 cm
+SCALE = 0.5  # Block "O" scaling, baseline is such that the bottom horizontal line is 10 cm
 ORIENTATION = np.array([  # frame orientation of Block "O"
     [1, 0, 0],
     [0, 1, 0],
     [0, 0, 1]])
 # Trapezoidal Time Scaling, s(t), NOTE: v^2/a <= 1
 # pure translation speeds
-VEL_TRAVEL = 2  # m/sec
-ACCEL_TRAVEL = 10  # m/sec^2
+VEL_TRAVEL = 0.005  # m/sec
+ACCEL_TRAVEL = 0.01  # m/sec^2
 # pure rotation speeds
-VEL_ROT = 2  # rad/sec
-ACCEL_ROT = 10   # rad/sec^2
+VEL_ROT = 0.005  # rad/sec
+ACCEL_ROT = 0.01  # rad/sec^2
 # ros communication rate
-ROSRATE_HZ = 10  # [Hz], 200
+ROSRATE_HZ = 200  # [Hz], 200
 
 
 # ***** PATH GENERATION PROGRAM *****
@@ -40,7 +40,7 @@ def main():
     # ***** GENERATE CORNER-WAYPOINT TRANSFORMATIONS *****
     waypoint_transformations = generate_waypoint_transformations(modified_waypoints_ordered)
     # ***** GENERATE ALL TRAPEZOIDAL TIME-SCALED TRANSFORMATIONS *****
-    trajectory = generate_trapezoidal_tranformations(waypoint_transformations, print_data=True)
+    trajectory = generate_trapezoidal_transformations(waypoint_transformations, print_data=False)
     # ***** OUTPUT TRAJECTORY TO dVRK ROBOT *****
     # run_dvrk(trajectory)
     return modified_waypoints_ordered, waypoint_transformations, trajectory
@@ -65,7 +65,7 @@ def modify_blockO():
     # modulation calculation
     modulated_waypoints = SCALE * np.dot(ORIENTATION, baseline_waypoints_ordered.T).T + ORIGIN_OFFSET
     # print output results
-    print(f"\nSCALING: {SCALE}, ORIGIN OFFSET: {ORIGIN_OFFSET}\nORIENTATION:\n{ORIENTATION},")
+    print(f"\nSCALING: {SCALE}\nORIGIN OFFSET: {ORIGIN_OFFSET}\nORIENTATION:\n{ORIENTATION},")
     print("\nModulated Block \"O\" Coordinates:")
     for i, waypoint in enumerate(modulated_waypoints):
         print(f'\tw{i}: {waypoint}')
@@ -122,7 +122,7 @@ def generate_waypoint_transformations(modified_waypoints_ordered):
     return T_list
 
 
-def generate_trapezoidal_tranformations(T_list, print_data):
+def generate_trapezoidal_transformations(T_list, print_data):
     """
     Given the list of corner-waypoint transformations, the straight-line interpolated transformations are computed
     from a trapezoidal time-scaling. The ordered list of the generated time-scaled trajectory is returned.
@@ -136,14 +136,15 @@ def generate_trapezoidal_tranformations(T_list, print_data):
     for i, _ in enumerate(T_list):
         try:
             # TODO add path from "home" to w0 and back to "home" at end
+            # parse adjacent waypoint transformations from list
             T_start = T_list[i]
             T_end = T_list[i + 1]
 
             # parse R,p from T
-            R_start = T_start[0:3, 0:3]
             p_start = T_start[0:3, 3]
-            R_end = T_end[0:3, 0:3]
             p_end = T_end[0:3, 3]
+            R_start = T_start[0:3, 0:3]
+            R_end = T_end[0:3, 0:3]
 
             if np.array_equal(R_start, R_end):  # pure travel movement
                 msg = 'Pure Translation'
@@ -156,9 +157,8 @@ def generate_trapezoidal_tranformations(T_list, print_data):
             else:
                 sys.exit('Path Error')
 
-            # Total time for straight-line path in task-space
-            T = (a + v ** 2) / (v * a)
             # init
+            T = (a + v ** 2) / (v * a)  # total time for straight-line path in task-space
             t = 0
             j = 0
             # Time-Scaling @ 200Hz
@@ -179,18 +179,25 @@ def generate_trapezoidal_tranformations(T_list, print_data):
                     s = 1  # finish path
 
                 # calculate R(s), p(s) of T=(R,p)
+                # P-SCALING
                 p_s = p_start + s * (p_end - p_start)
+
+                # R-SCALING
                 w, theta = matrix_log(np.matmul(R_start.T, R_end))
-                R_s = R_start * matrix_exp(w, theta * s)
+                R_s = np.matmul(R_start, matrix_exp(w, theta * s))
                 R_s[R_s==0.] = 0.  # get rid of -0.0 from floating point precision errors
+
+                # T-CREATION
                 # create transform from (R,p) & add to trajectory list
                 T_s = np.vstack([np.column_stack((R_s, p_s)), np.array([0, 0, 0, 1])])
                 trajectory.append(T_s)
+
                 if print_data:
-                    print(f'\n{msg} from w{i//2 } to w{i//2 + (i+1)%2}:\ns({round(t,3)}) = {round(s,3)}, of T = {round(T,3)} sec:\n T=\n{T_s}')
+                    print(f'\n{msg} from w{i//2 } to w{i//2 + (i+1)%2}:\ns({round(t,3)}) = {round(s,3)},'
+                          f' of T = {round(T,3)} sec:\n T=\n{T_s}')
 
         except IndexError:  # windowing 2 full transformations at a time, indices beyond at end
-            break
+            break  # expected @ end of loop
     return trajectory
 
 
