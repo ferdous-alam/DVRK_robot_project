@@ -101,7 +101,7 @@ def generate_waypoint_transformations(modified_waypoints_ordered):
             # --------- Rotation Column Vectors -----------------
             r_x = -r_parallel_unit
             r_z = -r_normal_unit
-            r_y = np.cross(r_x, r_z) / np.linalg.norm(np.cross(r_x, r_z))  # third, dependent unit vector of rotation
+            r_y = -np.cross(r_x, r_z) / np.linalg.norm(np.cross(r_x, r_z))  # dependent vector, (X x Z) = -Y
             # ---------------------------------------------------
 
             # build common rotation matrix
