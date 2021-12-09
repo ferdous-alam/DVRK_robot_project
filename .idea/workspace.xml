@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5104beb6-aa09-4855-b55c-bdc04546ca08" name="Changes" comment="readme update">
-      <change beforePath="$PROJECT_DIR$/Tests/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/Results/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PSM and Block O Models/blockO_print_10cm.stl" beforeDir="false" afterPath="$PROJECT_DIR$/PSM and Block O Models/BlockO/blockO_print_10cm.stl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PSM and Block O Models/blockO_print_5cm.stl" beforeDir="false" afterPath="$PROJECT_DIR$/PSM and Block O Models/BlockO/blockO_print_5cm.stl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PSM and Block O Models/blockO_print_5cm_logo.stl" beforeDir="false" afterPath="$PROJECT_DIR$/PSM and Block O Models/BlockO/blockO_print_5cm_logo.stl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,12 +48,17 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File" value="Python" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Codes" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/PSM and Block O Models" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="A:\Files\PycharmProjects\DVRK_robot_project\PSM and Block O Models" />
       <recent name="$PROJECT_DIR$/Codes" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="A:\Files\PycharmProjects\DVRK_robot_project\PSM and Block O Models\BlockO" />
+      <recent name="A:\Files\PycharmProjects\DVRK_robot_project\PSM and Block O Models" />
     </key>
   </component>
   <component name="RunManager" selected="Python.blockO_trajectory_generation">
@@ -189,7 +196,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639073038498</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="readme update">
+      <created>1639073475976</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1639073475976</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
