@@ -1,14 +1,16 @@
-import numpy as np
-import math
-import sys
-
 """
-This program takes in user-input of any desired Block "O" configuration and trapezoidal time-scaling velocity/
+This program takes user-input of any desired Block "O" configuration and trapezoidal time-scaling velocity/
 acceleration parameters, to generate a path and trajectory of tracing a Block "O" outline with the dVRK PSM.
 
 Below, defined as GLOBAL VARS, user-input variables can be modified to generate a desired path &
 trajectory.
 """
+
+
+import numpy as np
+import math
+import sys
+
 
 # ***** USER-INPUT PARAMETERS (Global Vars) *****
 # Block "O"

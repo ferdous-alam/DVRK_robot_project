@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5104beb6-aa09-4855-b55c-bdc04546ca08" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/DVRK_robot_project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DVRK_robot_project.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_7_21__12_44_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_7_21__12_44_PM__Changes_.xml" afterDir="false" />
+    <list default="true" id="5104beb6-aa09-4855-b55c-bdc04546ca08" name="Changes" comment="update to trajectory generation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Codes/blockO_trajectory_gen.py" beforeDir="false" afterPath="$PROJECT_DIR$/Codes/blockO_trajectory_gen.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Codes/blockO_trajectory_gen_workinprogress.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Codes/run_dvrk.py" beforeDir="false" afterPath="$PROJECT_DIR$/Codes/run_dvrk.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Codes/run_robot.py" beforeDir="false" afterPath="$PROJECT_DIR$/Codes/run_dvrk_terminal.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Codes/tau_analysis.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Codes/test_dvrk.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,8 +59,8 @@
       <recent name="$PROJECT_DIR$/Codes" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.blockO_trajectory_gen">
-    <configuration name="blockO_trajectory_gen" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.blockO_trajectory_generation">
+    <configuration name="blockO_trajectory_generation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="DVRK_robot_project" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -68,7 +69,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Codes/blockO_trajectory_gen.py" />
+      <option name="SCRIPT_NAME" value="A:\Files\PycharmProjects\DVRK_robot_project\Codes\blockO_trajectory_generation.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -121,7 +122,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.blockO_trajectory_gen" />
+        <item itemvalue="Python.blockO_trajectory_generation" />
         <item itemvalue="Python.scratch" />
         <item itemvalue="Python.blockO_trajectory_gen" />
         <item itemvalue="Python.tau_analysis" />
@@ -172,7 +173,14 @@
       <option name="project" value="LOCAL" />
       <updated>1638934690935</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="update to trajectory generation">
+      <created>1639071117351</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1639071117351</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -191,6 +199,7 @@
     <MESSAGE value="trajectory gen draft" />
     <MESSAGE value="fixed Rot scaling, fixed floating point impression, fixed lin alg numpy bugs" />
     <MESSAGE value="work in progress" />
-    <option name="LAST_COMMIT_MESSAGE" value="work in progress" />
+    <MESSAGE value="update to trajectory generation" />
+    <option name="LAST_COMMIT_MESSAGE" value="update to trajectory generation" />
   </component>
 </project>
