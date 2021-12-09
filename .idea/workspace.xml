@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5104beb6-aa09-4855-b55c-bdc04546ca08" name="Changes" comment="readme update">
-      <change beforePath="$PROJECT_DIR$/PSM and Block O Models/blockO_print_10cm.stl" beforeDir="false" afterPath="$PROJECT_DIR$/PSM and Block O Models/BlockO/blockO_print_10cm.stl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PSM and Block O Models/blockO_print_5cm.stl" beforeDir="false" afterPath="$PROJECT_DIR$/PSM and Block O Models/BlockO/blockO_print_5cm.stl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PSM and Block O Models/blockO_print_5cm_logo.stl" beforeDir="false" afterPath="$PROJECT_DIR$/PSM and Block O Models/BlockO/blockO_print_5cm_logo.stl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +24,7 @@
       </list>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -66,6 +65,9 @@
       <module name="DVRK_robot_project" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Codes" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -126,7 +128,6 @@
       <list>
         <item itemvalue="Python.blockO_trajectory_generation" />
         <item itemvalue="Python.scratch" />
-        <item itemvalue="Python.blockO_trajectory_gen" />
         <item itemvalue="Python.tau_analysis" />
       </list>
     </recent_temporary>
