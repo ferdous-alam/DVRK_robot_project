@@ -1,5 +1,5 @@
 import numpy as np
-from blockO_trajectory_gen import main
+from blockO_trajectory_generation import main
 
 
 # def run_dvrk(trajectory):

@@ -3,20 +3,18 @@ import math
 import sys
 
 """
-ISSUES: 
-1) floating-point imprecision leads to:
-    (ex: see matrix log function)
-    - need to round for any boolean comparisons
-    - need to round for arccos functions to be within range
-    - negative (-) zero to handle - equality comparisons challenging with +0, must use np.(allclose or isclose, NOT isequal) & math.isclose
-    - negative 0 (-0.0) in rotation matrices 
+This program takes in user-input of any desired Block "O" configuration and trapezoidal time-scaling velocity/
+acceleration parameters, to generate a path and trajectory of tracing a Block "O" outline with the dVRK PSM.
+
+Below, defined as GLOBAL VARS, user-input variables can be modified to generate a desired path &
+trajectory.
 """
 
 # ***** USER-INPUT PARAMETERS (Global Vars) *****
 # Block "O"
 ORIGIN_OFFSET = np.array([0, 0, 0])
 SCALE = 0.5  # Block "O" scaling, baseline is such that the bottom horizontal line is 10 cm
-ORIENTATION = np.array([  # frame orientation of Block "O"
+ORIENTATION = np.array([  # frame orientation of Block "O", default Identity(3x3)
     [1, 0, 0],
     [0, 1, 0],
     [0, 0, 1]])
@@ -28,13 +26,17 @@ ACCEL_TRAVEL = 0.01  # m/sec^2
 VEL_ROT = math.pi / 12  # rad/sec
 ACCEL_ROT = math.pi / 6  # rad/sec^2
 # ros communication rate
-ROSRATE_HZ = 200  # [Hz], 200
+ROSRATE_HZ = 200  # [Hz]
 
 
 # ***** PATH GENERATION PROGRAM *****
 
 
-def main():
+def main(trajectory_filename="tau"):
+    """
+    Main function block that runs through steps of generating trajectory, export to file optional.
+    :param trajectory_filename: name of trajectory file export, make "" empty string if no export desired
+    """
     # ***** BLOCK "O" MODIFICATION *****
     modified_waypoints_ordered = modify_blockO()
     # ***** GENERATE CORNER-WAYPOINT TRANSFORMATIONS *****
@@ -42,11 +44,21 @@ def main():
     # ***** GENERATE ALL TRAPEZOIDAL TIME-SCALED TRANSFORMATIONS *****
     trajectory = generate_trapezoidal_transformations(waypoint_transformations, print_data=False)
     # ***** OUTPUT TRAJECTORY TO dVRK ROBOT *****
-    # run_dvrk(trajectory)
+    export_dvrk_trajectory(trajectory, trajectory_filename)
     return modified_waypoints_ordered, waypoint_transformations, trajectory
 
 
-def modify_blockO():
+def export_dvrk_trajectory(tau: np.array, filename: str):
+    """Takes entire trajectory and saves it as npy with given filename."""
+    if filename is not "":
+        filename += '.npy'
+        np.save(filename, tau)
+        print(f'Trajectory Export to {filename} Completed!')
+    else:
+        print(f'Trajectory Completed but Not Exported!')
+
+
+def modify_blockO() -> np.array:
     """
     Modifies the basleine Block "O" coordinates, measured w.r.t the horizontal bottom section being 10cm. A scaling,
     origin offset, and reorientation can be performed to collectively modulate the coordinates, and resulting path.
@@ -247,5 +259,6 @@ def skew_sym_to_vec(m: np.ndarray) -> np.ndarray:
     return np.array([m[2, 1], m[0, 2], m[1, 0]])
 
 
-# run script
-modified_waypoints_ordered, waypoint_transformations, trajectory = main()
+# run script directly, or if run from terminal main() fxn must be imported to run
+if __name__ == "__main__":
+    modified_waypoints_ordered, waypoint_transformations, trajectory = main()
