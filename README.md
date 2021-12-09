@@ -1,4 +1,4 @@
-# dVRK Inverse Kinematics and Block "O" Trajectory Generation Project
+# dVRK Inverse Kinematics and Trajectory Generation Project
 
 This repo contains all files, resources, codes related to the DVRK robot project.
 
