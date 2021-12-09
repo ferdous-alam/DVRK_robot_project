@@ -2,7 +2,7 @@
 
 This repo contains all files, resources, codes related to the DVRK robot project.
 
-![](/Miscellaneous/dVRK_robot_trajectory_sim.gif)
+<img src="/Miscellaneous/dVRK_robot_trajectory_sim.gif" width="250" height="250"/>
 ![](/Miscellaneous/dVRK_robot_trajectory.gif)
 
 
