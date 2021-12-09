@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5104beb6-aa09-4855-b55c-bdc04546ca08" name="Changes" comment="update to trajectory generation">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Codes/blockO_trajectory_gen_workinprogress.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Codes/run_dvrk.py" beforeDir="false" afterPath="$PROJECT_DIR$/Codes/run_dvrk.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Codes/run_robot.py" beforeDir="false" afterPath="$PROJECT_DIR$/Codes/run_dvrk_terminal.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Codes/tau_analysis.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Codes/test_dvrk.py" beforeDir="false" />
-    </list>
+    <list default="true" id="5104beb6-aa09-4855-b55c-bdc04546ca08" name="Changes" comment="all code, formatting, and documentation done" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -180,7 +173,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639071117351</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="all code, formatting, and documentation done">
+      <created>1639072711410</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1639072711410</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -200,6 +200,7 @@
     <MESSAGE value="fixed Rot scaling, fixed floating point impression, fixed lin alg numpy bugs" />
     <MESSAGE value="work in progress" />
     <MESSAGE value="update to trajectory generation" />
-    <option name="LAST_COMMIT_MESSAGE" value="update to trajectory generation" />
+    <MESSAGE value="all code, formatting, and documentation done" />
+    <option name="LAST_COMMIT_MESSAGE" value="all code, formatting, and documentation done" />
   </component>
 </project>
