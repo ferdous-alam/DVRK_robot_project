@@ -25,8 +25,8 @@ ORIENTATION = np.array([  # frame orientation of Block "O"
 VEL_TRAVEL = 0.005  # m/sec
 ACCEL_TRAVEL = 0.01  # m/sec^2
 # pure rotation speeds
-VEL_ROT = 0.005  # rad/sec
-ACCEL_ROT = 0.01  # rad/sec^2
+VEL_ROT = math.pi / 12  # rad/sec
+ACCEL_ROT = math.pi / 6  # rad/sec^2
 # ros communication rate
 ROSRATE_HZ = 200  # [Hz], 200
 
@@ -98,14 +98,15 @@ def generate_waypoint_transformations(modified_waypoints_ordered):
             # unit vector parallel to travel path
             r_parallel_unit = (w_start - w_end) / np.linalg.norm(w_start - w_end)  # (wi - wi+1)/||wi - wi+1||
 
-            # --------- Rotation Column Vectors -----------------
-            r_x = -r_parallel_unit
+             # --------- Rotation Column Vectors -----------------
             r_z = -r_normal_unit
+            r_x = -r_parallel_unit
             r_y = -np.cross(r_x, r_z) / np.linalg.norm(np.cross(r_x, r_z))  # dependent vector, (X x Z) = -Y
             # ---------------------------------------------------
 
             # build common rotation matrix
-            R = np.column_stack((r_x, r_y, r_z))
+            R0B = np.array([[-1, 0, 0],[0, -1, 0], [0, 0, 1]])
+            R = np.matmul(R0B, np.column_stack((r_x, r_y, r_z)))
 
             # build transformations, T = (R,w)
             T_start = np.vstack([np.column_stack((R, w_start)), np.array([0, 0, 0, 1])])
