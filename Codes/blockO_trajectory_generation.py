@@ -16,9 +16,9 @@ import sys
 # Block "O"
 ORIGIN_OFFSET = np.array([0, 0, 0])
 SCALE = 0.5  # Block "O" scaling, baseline is such that the bottom horizontal line is 10 cm
-ORIENTATION = np.array([  # frame orientation of Block "O", default Identity(3x3)
-    [1, 0, 0],
-    [0, 1, 0],
+ORIENTATION = np.array([  # frame orientation of Block "O" w.r.t base frame {b}
+    [-1, 0, 0],
+    [0, -1, 0],
     [0, 0, 1]])
 # Trapezoidal Time Scaling, s(t), NOTE: v^2/a <= 1
 # pure translation speeds
@@ -119,8 +119,7 @@ def generate_waypoint_transformations(modified_waypoints_ordered):
             # ---------------------------------------------------
 
             # build common rotation matrix
-            R0B = np.array([[-1, 0, 0],[0, -1, 0], [0, 0, 1]])
-            R = np.matmul(R0B, np.column_stack((r_x, r_y, r_z)))
+            R = np.matmul(ORIENTATION, np.column_stack((r_x, r_y, r_z)))
 
             # build transformations, T = (R,w)
             T_start = np.vstack([np.column_stack((R, w_start)), np.array([0, 0, 0, 1])])
